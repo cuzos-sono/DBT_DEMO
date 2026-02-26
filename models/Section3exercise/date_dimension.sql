@@ -12,13 +12,16 @@ with cte as (
             ELSE 'BUSINESSDAY'
             END
             AS day_type,
-        case
+       {#  case
             when month in (12,1,2) then 'WINTER'
             when month in (3,4,5) then 'SPRING'
             when month in (6,7,8) then 'SUMMER'
             when month in (9,10,11) then 'AUTUMN'
             ELSE '' END
-            AS season_of_year,
+            AS season_of_year1 ,#}
+        {{FN_SEASON_OF_YEAR('month')}} as relative_date,
+        {{FN_RELATIVEDATE('started_at')}} as season_of_year
+        
     from 
     {{ source('demo', 'bike') }}
     --where

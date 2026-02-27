@@ -7,7 +7,7 @@ CTE as (
     left join {{ ref('daily_weather') }} weather 
         on trips.TRIP_DATE = weather.DATE
 
-    limit 1000
+    
 )
 
 
